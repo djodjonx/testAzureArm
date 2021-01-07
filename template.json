@@ -82,44 +82,6 @@
 			},
 			"properties": {},
 			"dependsOn": []
-		},
-		{
-			"type": "Microsoft.Web/sites",
-			"apiVersion": "2018-11-01",
-			"name": "[concat(parameters('webAppName'), '/dnt')]",
-			"location": "[parameters('location')]",
-			"kind": "app",
-			"dependsOn": [
-				"[parameters('AppServicePlanName')]"
-			],
-			"properties": {
-				"siteConfig": {
-					"alwaysOn": false,
-					"appSettings": [{
-							"Name": "DT_TENANT",
-							"Value": "[parameters('DT_TENANT')]"
-						},
-						{
-							"Name": "DT_API_TOKEN",
-							"Value": "[parameters('DT_API_TOKEN')]"
-						},
-						{
-							"Name": "DT_API_URL",
-							"Value": "[parameters('DT_API_URL')]"
-						}
-					]
-				},
-				"serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('AppServicePlanName'))]"
-			},
-			"resources": [{
-				"type": "siteextensions",
-				"apiVersion": "2018-02-01",
-				"name": "Dynatrace",
-				"dependsOn": [
-					"[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
-				],
-				"properties": {}
-			}]
 		}
 	]
 }
