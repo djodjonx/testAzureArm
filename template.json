@@ -63,7 +63,7 @@
 			"properties": {
 				"name": "[parameters('webAppName')]",
 				"siteConfig": {
-					"linuxFxVersion": "NODE|10.x",
+					"linuxFxVersion": "NODE|10.15.2",
 					"alwaysOn": "[variables('alwaysOn')]"
 				},
 				"serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('AppServicePlanName'))]",
