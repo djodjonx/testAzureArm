@@ -62,7 +62,7 @@
 			"type": "Microsoft.Web/sites",
 			"location": "[parameters('location')]",
 			"dependsOn": [
-				"[resourceId('Microsoft.Web/serverfarms/', parameters('appServicePlanName'))]"
+				"[resourceId('Microsoft.Web/serverfarms/', parameters('AppServicePlanName'))]"
 			],
 			"properties": {
 				"name": "[parameters('webAppName')]",
@@ -70,13 +70,13 @@
 					"linuxFxVersion": "[variables('linuxFxVersion')]",
 					"alwaysOn": "[variables('alwaysOn')]"
 				},
-				"serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]",
+				"serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('AppServicePlanName'))]",
 				"clientAffinityEnabled": false
 			}
 		},
 		{
 			"apiVersion": "2020-06-01",
-			"name": "[variables('appServicePlanName')]",
+			"name": "[parameters('AppServicePlanName')]",
 			"type": "Microsoft.Web/serverfarms",
 			"location": "[parameters('location')]",
 			"kind": "linux",
@@ -93,7 +93,7 @@
 			"location": "[parameters('location')]",
 			"kind": "app",
 			"dependsOn": [
-				"[parameters('appServicePlanName')]"
+				"[parameters('AppServicePlanName')]"
 			],
 			"properties": {
 				"name": "[parameters('webAppName')]",
@@ -113,7 +113,7 @@
 						}
 					]
 				},
-				"serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]"
+				"serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('AppServicePlanName'))]"
 			},
 			"resources": [{
 				"type": "siteextensions",
