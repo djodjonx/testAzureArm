@@ -60,7 +60,7 @@
 			"properties": {
 				"name": "[parameters('webAppName')]",
 				"siteConfig": {
-					"linuxFxVersion": "NODE|10-lts"
+					"linuxFxVersion": "NODE|10"
 				},
 				"serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('AppServicePlanName'))]",
 				"clientAffinityEnabled": false
