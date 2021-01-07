@@ -96,7 +96,7 @@
 				"[parameters('AppServicePlanName')]"
 			],
 			"properties": {
-				"name": "[parameters('webAppName')]",
+				"name": "[concat(parameters('webAppName'), '/config', )]",
 				"siteConfig": {
 					"alwaysOn": false,
 					"appSettings": [{
