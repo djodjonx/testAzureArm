@@ -59,9 +59,6 @@
 			],
 			"properties": {
 				"name": "[parameters('webAppName')]",
-				"siteConfig": {
-					"linuxFxVersion": "NODE|10"
-				},
 				"serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('AppServicePlanName'))]",
 				"clientAffinityEnabled": false
 			}
@@ -71,7 +68,7 @@
 			"name": "[parameters('AppServicePlanName')]",
 			"type": "Microsoft.Web/serverfarms",
 			"location": "[parameters('location')]",
-			"kind": "linux",
+			"kind": "app,linux",
 			"sku": {
 				"Name": "[parameters('sku')]"
 			},
