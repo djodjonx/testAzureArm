@@ -49,9 +49,6 @@
 			}
 		}
 	},
-	"variables": {
-		"alwaysOn": false
-	},
 	"resources": [{
 			"apiVersion": "2018-02-01",
 			"name": "[parameters('webAppName')]",
@@ -63,8 +60,7 @@
 			"properties": {
 				"name": "[parameters('webAppName')]",
 				"siteConfig": {
-					"linuxFxVersion": "NODE|10.15.2",
-					"alwaysOn": "[variables('alwaysOn')]"
+					"linuxFxVersion": "NODE|10-lts",
 				},
 				"serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('AppServicePlanName'))]",
 				"clientAffinityEnabled": false
