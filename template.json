@@ -23,24 +23,6 @@
 				"description": "Location for all resources."
 			}
 		},
-		"DT_TENANT": {
-			"type": "String",
-			"metadata": {
-				"description": "Tenant ID"
-			}
-		},
-		"DT_API_TOKEN": {
-			"type": "String",
-			"metadata": {
-				"description": "ENV Token"
-			}
-		},
-		"DT_API_URL": {
-			"type": "String",
-			"metadata": {
-				"description": "ENV URL"
-			}
-		},
 		"sku": {
 			"type": "string",
 			"defaultValue": "S1",
