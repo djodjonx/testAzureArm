@@ -1,131 +1,137 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "webAppName": {
-      "minLength": 2,
-      "type": "String",
-      "metadata": {
-        "description": "Base name of the resource such as web app name and app service plan"
+  "$schema":"https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion":"1.0.0.0",
+  "parameters":{
+    "webAppName":{
+      "minLength":2,
+      "type":"String",
+      "metadata":{
+        "description":"Base name of the resource such as web app name and app service plan"
       }
     },
-    "AppServicePlanName": {
-      "minLength": 2,
-      "type": "String",
-      "metadata": {
-        "description": "Base name of the resource such as web app name and app service plan"
+    "AppServicePlanName":{
+      "minLength":2,
+      "type":"String",
+      "metadata":{
+        "description":"Base name of the resource such as web app name and app service plan"
       }
     },
-    "location": {
-      "defaultValue": "[resourceGroup().location]",
-      "type": "String",
-      "metadata": {
-        "description": "Location for all resources."
+    "location":{
+      "defaultValue":"[resourceGroup().location]",
+      "type":"String",
+      "metadata":{
+        "description":"Location for all resources."
       }
     },
-    "DT_TENANT": {
-      "type": "String",
-      "metadata": {
-        "description": "Tenant ID"
+    "DT_TENANT":{
+      "type":"String",
+      "metadata":{
+        "description":"Tenant ID"
       }
     },
-    "DT_API_TOKEN": {
-      "type": "String",
-      "metadata": {
-        "description": "ENV Token"
+    "DT_API_TOKEN":{
+      "type":"String",
+      "metadata":{
+        "description":"ENV Token"
       }
     },
-    "DT_API_URL": {
-      "type": "String",
-      "metadata": {
-        "description": "ENV URL"
+    "DT_API_URL":{
+      "type":"String",
+      "metadata":{
+        "description":"ENV URL"
       }
     },
     "sku":{
-      "type": "string",
-      "defaultValue" : "S1",
-      "metadata": {
-        "description": "The SKU of App Service Plan,by default is Standard S1"
+      "type":"string",
+      "defaultValue":"S1",
+      "metadata":{
+        "description":"The SKU of App Service Plan,by default is Standard S1"
       }
     }
   },
-  "variables": {
-    "alwaysOn": false,
-    "workerSize": "0",
-    "workerSizeId": "0",
-    "numberOfWorkers": "1",
-    "linuxFxVersion": "NODE|lts",
+  "variables":{
+    "alwaysOn":false,
+    "workerSize":"0",
+    "workerSizeId":"0",
+    "numberOfWorkers":"1",
+    "linuxFxVersion":"NODE|lts"
   },
-  "resources": [
+  "resources":[
     {
-      "apiVersion": "2020-06-01",
-      "name": "[parameters('webAppName')]",
-      "type": "Microsoft.Web/sites",
-      "location": "[parameters('location')]",
-      "dependsOn": [
+      "apiVersion":"2020-06-01",
+      "name":"[parameters('webAppName')]",
+      "type":"Microsoft.Web/sites",
+      "location":"[parameters('location')]",
+      "dependsOn":[
         "[resourceId('Microsoft.Web/serverfarms/', parameters('appServicePlanName'))]"
       ],
-      "properties": {
-        "name": "[parameters('webAppName')]",
-        "siteConfig": {
-          "linuxFxVersion": "[variables('linuxFxVersion')]",
-          "alwaysOn": "[variables('alwaysOn')]"
+      "properties":{
+        "name":"[parameters('webAppName')]",
+        "siteConfig":{
+          "linuxFxVersion":"[variables('linuxFxVersion')]",
+          "alwaysOn":"[variables('alwaysOn')]"
         },
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]",
-        "clientAffinityEnabled": false
+        "serverFarmId":"[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]",
+        "clientAffinityEnabled":false
       }
     },
     {
-      "apiVersion": "2020-06-01",
-      "name": "[variables('appServicePlanName')]",
-      "type": "Microsoft.Web/serverfarms",
-      "location": "[parameters('location')]",
-      "kind": "linux",
-      "sku": {
-        "Name": "[parameters('sku')]"
+      "apiVersion":"2020-06-01",
+      "name":"[variables('appServicePlanName')]",
+      "type":"Microsoft.Web/serverfarms",
+      "location":"[parameters('location')]",
+      "kind":"linux",
+      "sku":{
+        "Name":"[parameters('sku')]"
       },
-      "properties": {},
-      "dependsOn": [],
+      "properties":{
+        
+      },
+      "dependsOn":[
+        
+      ]
     },
     {
-      "type": "Microsoft.Web/sites",
-      "apiVersion": "2018-11-01",
-      "name": "[parameters('webAppName')]",
-      "location": "[parameters('location')]",
-      "kind": "app",
-      "dependsOn": [
+      "type":"Microsoft.Web/sites",
+      "apiVersion":"2018-11-01",
+      "name":"[parameters('webAppName')]",
+      "location":"[parameters('location')]",
+      "kind":"app",
+      "dependsOn":[
         "[parameters('appServicePlanName')]"
       ],
-      "properties": {
-        "name": "[parameters('webAppName')]",
-        "siteConfig": {
-          "alwaysOn": false,
-          "appSettings": [
+      "properties":{
+        "name":"[parameters('webAppName')]",
+        "siteConfig":{
+          "alwaysOn":false,
+          "appSettings":[
             {
-              "Name": "DT_TENANT",
-              "Value": "[parameters('DT_TENANT')]"
+              "Name":"DT_TENANT",
+              "Value":"[parameters('DT_TENANT')]"
             },
             {
-              "Name": "DT_API_TOKEN",
-              "Value": "[parameters('DT_API_TOKEN')]"
+              "Name":"DT_API_TOKEN",
+              "Value":"[parameters('DT_API_TOKEN')]"
             },
             {
-              "Name": "DT_API_URL",
-              "Value": "[parameters('DT_API_URL')]"
+              "Name":"DT_API_URL",
+              "Value":"[parameters('DT_API_URL')]"
             }
           ]
         },
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]"
+        "serverFarmId":"[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]"
       },
-      "resources": [
+      "resources":[
         {
-          "type": "siteextensions",
-          "apiVersion": "2016-08-01",
-          "name": "Dynatrace",
-          "dependsOn": [
-              "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
+          "type":"siteextensions",
+          "apiVersion":"2016-08-01",
+          "name":"Dynatrace",
+          "dependsOn":[
+            "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
           ],
-          "properties": {}
+          "properties":{
+            
+          }
         }
       ]
     }
