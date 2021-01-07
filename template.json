@@ -50,8 +50,7 @@
 		}
 	},
 	"variables": {
-		"alwaysOn": false,
-		"linuxFxVersion": "NODE|10.16"
+		"alwaysOn": false
 	},
 	"resources": [{
 			"apiVersion": "2018-02-01",
@@ -64,7 +63,7 @@
 			"properties": {
 				"name": "[parameters('webAppName')]",
 				"siteConfig": {
-					"linuxFxVersion": "[variables('linuxFxVersion')]",
+					"linuxFxVersion": "NODE|10.14",
 					"alwaysOn": "[variables('alwaysOn')]"
 				},
 				"serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('AppServicePlanName'))]",
