@@ -90,7 +90,7 @@
       "location": "[parameters('location')]",
       "kind": "app",
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
+        "[resourceId('Microsoft.Web/sites', parameters('webAppName'), '-web')]"
       ],
       "properties": {
         "name": "[parameters('webAppName')]",
