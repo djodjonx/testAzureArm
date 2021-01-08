@@ -53,7 +53,7 @@
     {
       "apiVersion": "2018-02-01",
       "type": "Microsoft.Web/serverfarms",
-      "kind": "app,linux",
+      "kind": "app",
       "name": "[parameters('appServicePlanName')]",
       "location": "[parameters('location')]",
       "properties": {},
@@ -63,26 +63,14 @@
       }
     },
     {
-        "type": "Microsoft.Web/sites",
-        "apiVersion": "2018-11-01",
-        "location": "westeurope",
-        "name": "[concat(parameters('webAppName'), '-web')]",
-        "properties": {
-          "virtualApplications": [
-                {
-                    "virtualPath": "/",
-                    "physicalPath": "site\\form-lead",
-                    "preloadEnabled": true
-                }
-            ]
-        }
-    },
-    {
       "type": "Microsoft.Web/sites",
       "apiVersion": "2018-11-01",
       "name": "[parameters('webAppName')]",
       "location": "[parameters('location')]",
-      "kind": "app",
+      "kind": "app,linux",
+      "dependsOn": [
+        "[parameters('appServicePlanName')]"
+      ],
       "properties": {
         "name": "[parameters('webAppName')]",
         "siteConfig": {
@@ -100,6 +88,13 @@
               "Name": "DT_API_URL",
               "Value": "[parameters('DT_API_URL')]"
             }
+          ],
+          "virtualApplications": [
+            {
+              "virtualPath": "/",
+              "physicalPath": "site\\formLead",
+              "preloadEnabled": true
+            }
           ]
         },
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]"
@@ -107,7 +102,7 @@
       "resources": [
         {
           "type": "siteextensions",
-          "apiVersion": "2018-11-01",
+          "apiVersion": "2016-08-01",
           "name": "Dynatrace",
           "dependsOn": [
               "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
