@@ -72,7 +72,7 @@
     {
         "type": "Microsoft.Web/sites/config",
         "apiVersion": "2018-11-01",
-        "name": "[concat(parameters('webAppName'), '-web/config')]",
+        "name": "[concat(parameters('webAppName'), '/web-config')]",
         "properties": {
             "virtualApplications": [
                 {
@@ -89,9 +89,6 @@
       "name": "[parameters('webAppName')]",
       "location": "[parameters('location')]",
       "kind": "app",
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/sites', parameters('webAppName'), '-web')]"
-      ],
       "properties": {
         "name": "[parameters('webAppName')]",
         "siteConfig": {
