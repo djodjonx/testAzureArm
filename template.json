@@ -53,7 +53,7 @@
     {
       "apiVersion": "2018-02-01",
       "type": "Microsoft.Web/serverfarms",
-      "kind": "app",
+      "kind": "app,linux",
       "name": "[parameters('appServicePlanName')]",
       "location": "[parameters('location')]",
       "properties": {},
@@ -67,7 +67,7 @@
       "apiVersion": "2018-11-01",
       "name": "[parameters('webAppName')]",
       "location": "[parameters('location')]",
-      "kind": "app",
+      "kind": "app,linux",
       "dependsOn": [
         "[parameters('appServicePlanName')]"
       ],
@@ -75,6 +75,7 @@
         "name": "[parameters('webAppName')]",
         "siteConfig": {
           "alwaysOn": false,
+          "linuxFxVersion": "NODE|12-lts"
           "appSettings": [
             {
               "Name": "DT_TENANT",
