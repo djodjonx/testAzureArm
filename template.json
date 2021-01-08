@@ -67,14 +67,8 @@
         "apiVersion": "2018-11-01",
         "location": "westeurope",
         "name": "[concat(parameters('webAppName'), '-web')]",
-        "properties": {}
-    },
-    {
-        "type": "Microsoft.Web/sites/config",
-        "apiVersion": "2018-11-01",
-        "name": "[concat(parameters('webAppName'), '/web-config')]",
         "properties": {
-            "virtualApplications": [
+          "virtualApplications": [
                 {
                     "virtualPath": "/",
                     "physicalPath": "site\\form-lead",
