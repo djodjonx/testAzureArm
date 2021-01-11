@@ -88,13 +88,6 @@
               "Name": "DT_API_URL",
               "Value": "[parameters('DT_API_URL')]"
             }
-          ],
-          "virtualApplications": [
-            {
-              "virtualPath": "/",
-              "physicalPath": "site\\formLead",
-              "preloadEnabled": true
-            }
           ]
         },
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]"
